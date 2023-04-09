@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.ridho.firstnews.R
 import com.ridho.firstnews.databinding.ItemArticlePreviewBinding
 import com.ridho.firstnews.models.Article
 
@@ -32,8 +34,11 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = differ.currentList[position]
         holder.binding.apply {
-            Glide.with(root.context).load(article.urlToImage).into(ivArticleImage)
-            tvSource.text = article.source.name
+            Glide.with(root.context)
+                .load(article.urlToImage)
+                .apply(RequestOptions().placeholder(R.drawable.placeholder_view_vector))
+                .into(ivArticleImage)
+            tvSource.text = article.source?.name
             tvTitle.text = article.title
             tvDescription.text = article.description
             tvPublishedAt.text = article.publishedAt

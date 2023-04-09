@@ -11,7 +11,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.ridho.firstnews.R
 import com.ridho.firstnews.adapters.NewsAdapter
 import com.ridho.firstnews.databinding.FragmentArticleBinding
-import com.ridho.firstnews.databinding.FragmentBreakingNewsBinding
 import com.ridho.firstnews.ui.NewsActivity
 import com.ridho.firstnews.ui.NewsViewModel
 
@@ -39,14 +38,20 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
         val article = args.article
         binding.webView.apply {
             webViewClient = WebViewClient()
-            loadUrl(article.url)
+            article.url?.let { loadUrl(it) }
         }
 
-        binding.fab.setOnClickListener{
+        binding.fab.setOnClickListener {
             viewModel.saveArticle(article)
             Snackbar.make(view, "Article saved successfully", Snackbar.LENGTH_SHORT).show()
         }
 
-
+        viewModel.isArticleSaved(article.url ?: "").observe(viewLifecycleOwner) { isSaved ->
+            if (isSaved) {
+                binding.fab.visibility = View.GONE
+            } else {
+                binding.fab.visibility = View.VISIBLE
+            }
+        }
     }
 }

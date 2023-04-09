@@ -1,5 +1,8 @@
 package com.ridho.firstnews.repository
 
+import android.text.BoringLayout
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import com.ridho.firstnews.api.RetrofitInstance
 import com.ridho.firstnews.db.ArticleDatabase
 import com.ridho.firstnews.models.Article
@@ -18,4 +21,10 @@ class NewsRepository(
     fun getSavedNews() = db.getArticleDao().getAllArticles()
 
     suspend fun deleteArticle(article: Article) = db.getArticleDao().deleteArticle(article)
+
+    fun isArticleSaved(articleUrl: String): LiveData<Boolean> {
+        return db.getArticleDao().getArticleByUrl(articleUrl).map {
+            it != null
+        }
+    }
 }

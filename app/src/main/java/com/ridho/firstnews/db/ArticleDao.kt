@@ -15,4 +15,7 @@ interface ArticleDao {
 
     @Delete
     suspend fun deleteArticle(article: Article)
+
+    @Query("SELECT * FROM articles WHERE url = :url")
+    fun getArticleByUrl(url: String): LiveData<Article?>
 }
