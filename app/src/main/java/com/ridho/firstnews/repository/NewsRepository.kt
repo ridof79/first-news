@@ -16,8 +16,8 @@ class NewsRepository(
     suspend fun searchNews(searchQuery: String, pageNumber: Int) =
         RetrofitInstance.api.searchForNews(searchQuery, pageNumber)
 
-    suspend fun getNewsByCategoryAndSource(newsCategory: String, sourceCountry: String) =
-        RetrofitInstance.api.getNewsByCategoryAndCountry(newsCategory, sourceCountry)
+    suspend fun getNewsByCategoryAndSource(newsCategory: String, sourceCountry: String, pageNumber: Int) =
+        RetrofitInstance.api.getNewsByCategoryAndCountry(newsCategory, sourceCountry, pageNumber)
 
     suspend fun upsert(article: Article) = db.getArticleDao().upsert(article)
 

@@ -1,7 +1,6 @@
 package com.ridho.firstnews.api
 
 import com.ridho.firstnews.models.NewsResponse
-import com.ridho.firstnews.models.NewsResponseV2
 import com.ridho.firstnews.util.constant.Constants.Companion.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
@@ -28,13 +27,15 @@ interface NewsAPI {
         apiKey : String = API_KEY
     ): Response<NewsResponse>
 
-    @GET("/v2/top-headlines/sources")
+    @GET("/v2/top-headlines")
     suspend fun getNewsByCategoryAndCountry(
         @Query("category")
         newsCategory : String,
         @Query("country")
         sourceCountry : String,
+        @Query("page")
+        pageNumber : Int = 1,
         @Query("apiKey")
         apiKey : String = API_KEY
-    ): Response<NewsResponseV2>
+    ): Response<NewsResponse>
 }

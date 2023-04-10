@@ -61,8 +61,8 @@
         android:name="NewsListFragment"
         android:label="NewsListFragment" >
         <action
-            android:id="@+id/action_newsListFragment_to_articleV2Fragment"
-            app:destination="@id/articleV2Fragment" />
+            android:id="@+id/action_newsListFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
     </fragment>
     <fragment
         android:id="@+id/sourceNewsFragment"
@@ -72,8 +72,4 @@
             android:id="@+id/action_sourceNewsFragment_to_newsListFragment"
             app:destination="@id/newsListFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/articleV2Fragment"
-        android:name="com.ridho.firstnews.ui.fragments.ArticleV2Fragment"
-        android:label="ArticleV2Fragment" />
 </navigation>

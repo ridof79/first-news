@@ -29,6 +29,10 @@ class NewsViewModel(
     val searchNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     var searchNewsPage = 1
     var searchNewsResponse: NewsResponse? = null
+
+    val newsList: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+    var newsListPage = 1
+    var newsListResponse: NewsResponse? = null
     init {
         getBreakingNews("us")
     }
@@ -40,7 +44,25 @@ class NewsViewModel(
     }
 
     fun getNewsByCategoryAndSource(newsCategory: String, sourceCountry: String) = viewModelScope.launch {
-        newsRepository.getNewsByCategoryAndSource(newsCategory, sourceCountry)
+        safeNewsListCall(newsCategory, sourceCountry)
+    }
+
+    private fun handleNewsListResponse(response: Response<NewsResponse>) : Resource<NewsResponse> {
+        if(response.isSuccessful) {
+            response.body()?.let {
+                    resultResponse ->
+                newsListPage++
+                if (newsListResponse == null) {
+                    newsListResponse = resultResponse
+                } else {
+                    val oldArticles = newsListResponse?.articles
+                    val newArticles = resultResponse.articles
+                    oldArticles?.addAll(newArticles)
+                }
+                return Resource.Success(newsListResponse ?: resultResponse)
+            }
+        }
+        return Resource.Error(response.message())
     }
 
     private fun handleBreakingNewsResponse(response: Response<NewsResponse>) : Resource<NewsResponse> {
@@ -87,6 +109,23 @@ class NewsViewModel(
 
     fun deleteArticle(article: Article) = viewModelScope.launch {
         newsRepository.deleteArticle(article)
+    }
+
+    private suspend fun safeNewsListCall(newsCategory: String, sourceCountry: String) {
+        searchNews.postValue(Resource.Loading())
+        try {
+            if (hasInternetConnection()) {
+                val response = newsRepository.getNewsByCategoryAndSource(newsCategory, sourceCountry, newsListPage)
+                newsList.postValue(handleNewsListResponse(response))
+            } else {
+                newsList.postValue(Resource.Error("No internet connection"))
+            }
+        } catch (t: Throwable) {
+            when(t) {
+                is IOException -> newsList.postValue(Resource.Error("Network Failure"))
+                else -> newsList.postValue(Resource.Error("Conversion error"))
+            }
+        }
     }
 
     private suspend fun safeSearchNewsCall(searchQuery: String) {
