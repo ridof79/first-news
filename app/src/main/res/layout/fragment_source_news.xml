@@ -2,76 +2,87 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/source_news">
+    android:id="@+id/source_news"
+    android:padding="5dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choose source Country"
+        android:text="@string/choose_source_country"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:padding="3dp"/>
 
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:rowCount="4"
-        android:columnCount="3">
+        android:columnCount="3"
+        android:useDefaultMargins="true">
 
         <Button
             android:id="@+id/btn_ar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="Argentina" />
+            android:text="@string/argentina"
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/btn_au"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="Australia" />
+            android:text="@string/australia"
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/btn_fr"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="France" />
+            android:text="@string/france"
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/btn_de"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="Germany" />
+            android:text="@string/germany"
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/btn_ru"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="Russia" />
+            android:text="@string/russia"
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/btn_us"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="us" />
+            android:text="@string/us"
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/btn_jp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="Japan" />
+            android:text="@string/japan"
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/btn_all_source"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="All Source" />
+            android:text="@string/all_source"
+            android:textColor="@color/white"/>
 
     </GridLayout>
 

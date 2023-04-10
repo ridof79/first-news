@@ -1,12 +1,10 @@
 package com.ridho.firstnews.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,19 +12,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.ridho.firstnews.R
 import com.ridho.firstnews.adapters.NewsAdapter
-import com.ridho.firstnews.databinding.FragmentBreakingNewsBinding
 import com.ridho.firstnews.databinding.FragmentSavedNewsBinding
 import com.ridho.firstnews.ui.NewsActivity
 import com.ridho.firstnews.ui.NewsViewModel
-import com.ridho.firstnews.util.Resource
 
 class SavedNewsFragment : Fragment(R.layout.fragment_saved_news) {
 
     lateinit var viewModel: NewsViewModel
     private lateinit var newsAdapter: NewsAdapter
     private lateinit var binding: FragmentSavedNewsBinding
-
-    private val TAG = "SavedNewsFragment"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,9 +75,9 @@ class SavedNewsFragment : Fragment(R.layout.fragment_saved_news) {
             attachToRecyclerView(binding.rvSavedNews)
         }
 
-        viewModel.getSavedNews().observe(viewLifecycleOwner, Observer {
-            articles -> newsAdapter.differ.submitList(articles)
-        })
+        viewModel.getSavedNews().observe(viewLifecycleOwner) { articles ->
+            newsAdapter.differ.submitList(articles)
+        }
     }
     private fun setupRecyclerView() {
         newsAdapter = NewsAdapter()

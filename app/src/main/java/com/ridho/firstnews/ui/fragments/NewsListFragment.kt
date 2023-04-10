@@ -1,3 +1,5 @@
+package com.ridho.firstnews.ui.fragments
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,16 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ridho.firstnews.R
 import com.ridho.firstnews.adapters.NewsAdapter
-import com.ridho.firstnews.api.RetrofitInstance
 import com.ridho.firstnews.databinding.FragmentNewsListBinding
 import com.ridho.firstnews.ui.NewsActivity
 import com.ridho.firstnews.ui.NewsViewModel
 import com.ridho.firstnews.util.Resource
 import com.ridho.firstnews.util.constant.Constants
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class NewsListFragment : Fragment() {
     private lateinit var binding: FragmentNewsListBinding
@@ -56,7 +53,7 @@ class NewsListFragment : Fragment() {
             )
         }
 
-        viewModel.newsList.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.newsList.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
@@ -80,7 +77,7 @@ class NewsListFragment : Fragment() {
                     showProgressBar()
                 }
             }
-        })
+        }
     }
 
     private fun hideProgressBar() {
@@ -129,6 +126,7 @@ class NewsListFragment : Fragment() {
     private fun setupRecyclerView() {
         newsAdapter = NewsAdapter()
         binding.rvNewsList.apply {
+            viewModel.getNewsByCategoryAndSource(newsCategory, sourceCountry)
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
             addOnScrollListener(this@NewsListFragment.scrollListener)

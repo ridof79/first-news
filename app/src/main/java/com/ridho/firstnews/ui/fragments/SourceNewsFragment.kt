@@ -1,6 +1,5 @@
-package com.ridho.firstnews.ui
+package com.ridho.firstnews.ui.fragments
 
-import NewsListFragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

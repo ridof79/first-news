@@ -49,7 +49,7 @@ class BreakingNewsFragment : Fragment() {
             )
         }
 
-        viewModel.breakingNews.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.breakingNews.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
@@ -58,21 +58,22 @@ class BreakingNewsFragment : Fragment() {
                         val totalPages = newsResponse.totalResults / QUERY_PAGE_SIZE + 2
                         isLastPage = viewModel.breakingNewsPage == totalPages
                         if (isLastPage) {
-                            binding.rvBreakingNews.setPadding(0,0,0,0)
+                            binding.rvBreakingNews.setPadding(0, 0, 0, 0)
                         }
                     }
                 }
                 is Resource.Error -> {
                     hideProgressBar()
                     response.message?.let { message ->
-                        Toast.makeText(activity, "An error occurred: $message", Toast.LENGTH_LONG).show()
+                        Toast.makeText(activity, "An error occurred: $message", Toast.LENGTH_LONG)
+                            .show()
                     }
                 }
                 is Resource.Loading -> {
                     showProgressBar()
                 }
             }
-        })
+        }
     }
 
     private fun hideProgressBar() {
@@ -112,7 +113,7 @@ class BreakingNewsFragment : Fragment() {
                     isTotalMoreThanVisible && isScrolling
 
             if (shouldPaginate) {
-                viewModel.getBreakingNews("us")
+                viewModel.getBreakingNews("id")
                 isScrolling = false
             }
         }

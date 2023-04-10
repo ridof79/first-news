@@ -1,6 +1,5 @@
 package com.ridho.firstnews.repository
 
-import android.text.BoringLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.ridho.firstnews.api.RetrofitInstance

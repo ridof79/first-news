@@ -53,23 +53,38 @@
         android:name="com.ridho.firstnews.ui.fragments.CategoryNewsFragment"
         android:label="CategoryNewsFragment" >
         <action
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             android:id="@+id/action_categoryNewsFragment_to_sourceNewsFragment"
-            app:destination="@id/sourceNewsFragment" />
+            app:destination="@id/sourceNewsFragment"
+            app:popUpToSaveState="true"/>
     </fragment>
     <fragment
         android:id="@+id/newsListFragment"
-        android:name="NewsListFragment"
+        android:name="com.ridho.firstnews.ui.fragments.NewsListFragment"
         android:label="NewsListFragment" >
         <action
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             android:id="@+id/action_newsListFragment_to_articleFragment"
-            app:destination="@id/articleFragment" />
+            app:destination="@id/articleFragment"
+            app:popUpToSaveState="true"/>
     </fragment>
     <fragment
         android:id="@+id/sourceNewsFragment"
-        android:name="com.ridho.firstnews.ui.SourceNewsFragment"
+        android:name="com.ridho.firstnews.ui.fragments.SourceNewsFragment"
         android:label="SourceNewsFragment" >
         <action
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             android:id="@+id/action_sourceNewsFragment_to_newsListFragment"
-            app:destination="@id/newsListFragment" />
+            app:destination="@id/newsListFragment"
+            app:popUpToSaveState="true"/>
     </fragment>
 </navigation>

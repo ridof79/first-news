@@ -16,11 +16,8 @@ import com.ridho.firstnews.ui.NewsViewModel
 
 class ArticleFragment : Fragment(R.layout.fragment_article) {
     private lateinit var viewModel: NewsViewModel
-    private lateinit var newsAdapter: NewsAdapter
     private lateinit var binding: FragmentArticleBinding
     val args: ArticleFragmentArgs by navArgs()
-
-    private val TAG = "BreakingNewsFragment"
 
     override fun onCreateView(
         inflater: LayoutInflater,

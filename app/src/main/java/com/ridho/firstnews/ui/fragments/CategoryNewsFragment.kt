@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ridho.firstnews.R
 import com.ridho.firstnews.databinding.FragmentCategoryNewsBinding
-import com.ridho.firstnews.ui.SourceNewsFragment
 
 class CategoryNewsFragment : Fragment() {
     private lateinit var binding: FragmentCategoryNewsBinding
@@ -48,6 +47,11 @@ class CategoryNewsFragment : Fragment() {
 
         binding.btnTechnology.setOnClickListener {
             newsCategory = "technology"
+            navigateToSourceNewsFragment()
+        }
+
+        binding.btnScience.setOnClickListener {
+            newsCategory = "science"
             navigateToSourceNewsFragment()
         }
 

@@ -9,4 +9,23 @@
     <string name="description">DESCRIPTION</string>
     <string name="published_at">PUBLISHED AT</string>
     <string name="category">Category</string>
+    <string name="news_image">News Image</string>
+    <string name="choose_a_category">Choose a category</string>
+    <string name="general">General</string>
+    <string name="business">Business</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="health">Health</string>
+    <string name="science">Science</string>
+    <string name="sports">Sports</string>
+    <string name="technology">Technology</string>
+    <string name="all_category">All Category</string>
+    <string name="choose_source_country">Choose source country</string>
+    <string name="argentina">Argentina</string>
+    <string name="australia">Australia</string>
+    <string name="france">France</string>
+    <string name="germany">Germany</string>
+    <string name="russia">Russia</string>
+    <string name="us">us</string>
+    <string name="japan">Japan</string>
+    <string name="all_source">All Source</string>
 </resources>

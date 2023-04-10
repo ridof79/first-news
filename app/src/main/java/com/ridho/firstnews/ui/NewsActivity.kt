@@ -24,7 +24,7 @@ class NewsActivity : AppCompatActivity() {
 
         val repository = NewsRepository(ArticleDatabase(this))
         val viewModelProviderFactory = NewsViewModelProviderFactory(application, repository)
-        viewModel = ViewModelProvider(this, viewModelProviderFactory).get(NewsViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelProviderFactory)[NewsViewModel::class.java]
 
         fun findNavController(activity: FragmentActivity): NavController? {
             val navHostFragment = activity.supportFragmentManager
@@ -36,6 +36,4 @@ class NewsActivity : AppCompatActivity() {
         findNavController(this)?.let { binding.bottomNavigationView.setupWithNavController(it) }
 
     }
-
-
 }

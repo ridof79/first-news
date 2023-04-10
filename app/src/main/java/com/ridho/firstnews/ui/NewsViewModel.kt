@@ -3,9 +3,7 @@ package com.ridho.firstnews.ui
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.ConnectivityManager.*
 import android.net.NetworkCapabilities.*
-import android.os.Build
 import androidx.lifecycle.*
 import com.ridho.firstnews.FirstNewsApp
 import com.ridho.firstnews.models.Article
@@ -34,7 +32,8 @@ class NewsViewModel(
     var newsListPage = 1
     var newsListResponse: NewsResponse? = null
     init {
-        getBreakingNews("us")
+        getBreakingNews("id")
+
     }
     fun getBreakingNews(countryCode: String) = viewModelScope.launch {
         safeBreakingNewsCall(countryCode)
