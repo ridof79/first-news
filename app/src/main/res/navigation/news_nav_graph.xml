@@ -48,4 +48,32 @@
             android:name="article"
             app:argType="com.ridho.firstnews.models.Article" />
     </fragment>
+    <fragment
+        android:id="@+id/categoryNewsFragment"
+        android:name="com.ridho.firstnews.ui.fragments.CategoryNewsFragment"
+        android:label="CategoryNewsFragment" >
+        <action
+            android:id="@+id/action_categoryNewsFragment_to_sourceNewsFragment"
+            app:destination="@id/sourceNewsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsListFragment"
+        android:name="NewsListFragment"
+        android:label="NewsListFragment" >
+        <action
+            android:id="@+id/action_newsListFragment_to_articleV2Fragment"
+            app:destination="@id/articleV2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sourceNewsFragment"
+        android:name="com.ridho.firstnews.ui.SourceNewsFragment"
+        android:label="SourceNewsFragment" >
+        <action
+            android:id="@+id/action_sourceNewsFragment_to_newsListFragment"
+            app:destination="@id/newsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/articleV2Fragment"
+        android:name="com.ridho.firstnews.ui.fragments.ArticleV2Fragment"
+        android:label="ArticleV2Fragment" />
 </navigation>

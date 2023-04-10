@@ -29,18 +29,18 @@ class NewsViewModel(
     val searchNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     var searchNewsPage = 1
     var searchNewsResponse: NewsResponse? = null
-
-
     init {
         getBreakingNews("us")
     }
-
     fun getBreakingNews(countryCode: String) = viewModelScope.launch {
         safeBreakingNewsCall(countryCode)
     }
-
     fun searchNews(searchQuery: String) = viewModelScope.launch {
         safeSearchNewsCall(searchQuery)
+    }
+
+    fun getNewsByCategoryAndSource(newsCategory: String, sourceCountry: String) = viewModelScope.launch {
+        newsRepository.getNewsByCategoryAndSource(newsCategory, sourceCountry)
     }
 
     private fun handleBreakingNewsResponse(response: Response<NewsResponse>) : Resource<NewsResponse> {
@@ -127,28 +127,16 @@ class NewsViewModel(
         val connectivityManager = getApplication<FirstNewsApp>().getSystemService(
             Context.CONNECTIVITY_SERVICE
         ) as ConnectivityManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val activeNetwork = connectivityManager.activeNetwork ?: return false
-            val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
-            return when {
-                capabilities.hasTransport(TRANSPORT_WIFI) -> true
-                capabilities.hasTransport(TRANSPORT_CELLULAR) -> true
-                capabilities.hasTransport(TRANSPORT_ETHERNET) -> true
-                else -> false
-            }
-        } else {
-            connectivityManager.activeNetworkInfo?.run {
-                return when(type) {
-                    TYPE_WIFI -> true
-                    TYPE_MOBILE -> true
-                    TYPE_ETHERNET -> true
-                    else -> false
-                }
-            }
+        val activeNetwork = connectivityManager.activeNetwork ?: return false
+        val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
+        return when {
+            capabilities.hasTransport(TRANSPORT_WIFI) -> true
+            capabilities.hasTransport(TRANSPORT_CELLULAR) -> true
+            capabilities.hasTransport(TRANSPORT_ETHERNET) -> true
+            else -> false
         }
         return false
     }
-
     fun isArticleSaved(articleUrl: String): LiveData<Boolean> {
         return newsRepository.isArticleSaved(articleUrl)
     }
