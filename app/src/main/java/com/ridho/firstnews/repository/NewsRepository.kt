@@ -7,7 +7,7 @@ import com.ridho.firstnews.db.ArticleDatabase
 import com.ridho.firstnews.models.Article
 
 class NewsRepository(
-    val db: ArticleDatabase
+    private val db: ArticleDatabase
 ) {
     suspend fun getBreakingNews(countryCode: String, pageNumber: Int) =
         RetrofitInstance.api.getBreakingNews(countryCode, pageNumber)
